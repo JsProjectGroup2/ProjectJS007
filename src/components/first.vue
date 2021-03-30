@@ -3,18 +3,19 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-6">
-          <a
+          <router-link
+            to="/"
             class="navbar-brand"
             style="display: block; margin-top: 15px; margin-left: 35.5px"
             href="#"
           >
             <img src="../../img/logo.png" alt="" height="65" />
-          </a>
+          </router-link>
         </div>
         <div class="col-6 d-flex justify-content-end">
           <div class="d-flex align-items-center">
             <router-link
-              to="/"
+              to="/login"
               class="btn btn-y"
               style="
                 display: block;
@@ -43,9 +44,9 @@
           หากพร้อมรับชม ป้อนอีเมลเพื่อสร้างหรือเริ่มต้นการเป็นสมาชิกอีกครั้ง
         </div>
         <div class="d-flex flex-row">
-          <div class="form-floating" style="width:70%;height:70px">
+          <div class="form-floating" style="width: 70%; height: 70px">
             <input
-            style="height:70px"
+              style="height: 70px"
               type="email"
               class="form-control"
               id="floatingInput"
@@ -53,7 +54,12 @@
             />
             <label for="floatingInput">ที่อยู่อีเมล</label>
           </div>
-          <button class="btn btn-primary" style="width:30%;font-size:1.875rem;background: #ff4f00;">เริ่มต้นใช้งาน ></button>
+          <button
+            class="btn btn-primary"
+            style="width: 30%; font-size: 1.875rem; background: #ff4f00"
+          >
+            เริ่มต้นใช้งาน >
+          </button>
         </div>
       </div>
     </div>
