@@ -44,22 +44,25 @@
           หากพร้อมรับชม ป้อนอีเมลเพื่อสร้างหรือเริ่มต้นการเป็นสมาชิกอีกครั้ง
         </div>
         <div class="d-flex flex-row">
-          <div class="form-floating" style="width: 70%; height: 70px">
-            <input
-              style="height: 70px"
-              type="email"
-              class="form-control"
-              id="floatingInput"
-              placeholder="name@example.com"
-            />
-            <label for="floatingInput">ที่อยู่อีเมล</label>
-          </div>
-          <button
-            class="btn btn-primary"
-            style="width: 30%; font-size: 1.875rem; background: #ff4f00"
-          >
-            เริ่มต้นใช้งาน >
-          </button>
+          <form @submit.prevent="" class="w-100 d-flex">
+            <div class="form-floating" style="width: 70%; height: 70px">
+              <input
+                v-model="member.mail"
+                style="height: 70px"
+                type="email"
+                class="form-control"
+                id="floatingInput"
+                placeholder="name@example.com"
+              />
+              <label for="floatingInput">ที่อยู่อีเมล</label>
+            </div>
+            <button
+              class="btn btn-primary"
+              style="width: 30%; font-size: 1.875rem; background: #ff4f00"
+            >
+              เริ่มต้นใช้งาน >
+            </button>
+          </form>
         </div>
       </div>
     </div>
@@ -109,7 +112,16 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      member: {
+        mail: "",
+      },
+    };
   },
+  methods:{
+      Sentmail(){
+        
+      }
+  }
 };
 </script>
