@@ -7,8 +7,7 @@
             to="/"
             class="navbar-brand"
             style="display: block; margin-top: 15px; margin-left: 35.5px"
-            href="#"
-          >
+            href="#">
             <img src="../../img/logo.png" alt="" height="65" />
           </router-link>
         </div>
@@ -16,32 +15,14 @@
     </div>
   </nav>
   <div class="bg">
-    <div class="gradiant"></div>
+    <div class="gradiant">
+        <div class="position-absolute top-50 start-50 translate-middle">
+            <form></form>
+        </div>
+    </div>
   </div>
 </template>
-<style>
-.text1 {
-  color: white;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 4rem;
-  font-weight: 900;
-  line-height: normal;
-}
-.text2 {
-  color: white;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 1.625rem;
-  /*font-weight: 900;*/
-}
-.text3 {
-  color: white;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 1.2rem;
-  /*font-weight: 900;*/
-}
-.btn-y {
-  background: #ff4f00;
-}
+<style> 
 .gradiant {
   width: 100%;
   height: 100vh;
