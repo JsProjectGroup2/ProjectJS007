@@ -27,45 +27,73 @@
           height: 550px;
         "
       >
-        <form @submit.prevent="login"> 
+        <form @submit.prevent="login">
           <div>
             <h1 class="h1">เข้าสู่ระบบ</h1>
+            <div v-show="isCorrect" class="alert">
+              ขออภัย ไม่พบบัญชีที่ใช้ที่อยู่อีเมลนี้ โปรดลอง<br />อีกครั้งหรือ
+              <router-link to="/" class="link2">สร้างบัญชีใหม่</router-link>
+            </div>
             <div style="padding: 0px 0px 16px">
               <div class="form-floating">
                 <input
                   v-model="member.mail"
-                  style="background: #333; border: 0;color:white"
-                  type="email"
+                  style="background: #333; border: 0; color: white"
+                  type="text"
                   class="form-control"
-                  id="floatingInput"
+                  id="1"
                   placeholder="name@example.com"
                 />
-                <label for="floatingInput" class="input"
-                  >อีเมลหรือหมายเลขโทรศัพท์</label
-                >
+                <label for="1" class="input">อีเมลหรือหมายเลขโทรศัพท์</label>
               </div>
+              <span
+                v-show="isMail"
+                style="
+                  color: #e87c03;
+                  margin-top: 12px;
+                  display: block;
+                  font-size: 13px;
+                "
+                >โปรดป้อนอีเมลหรือหมายเลขโทรศัพท์ที่ถูกต้อง</span
+              >
             </div>
             <div style="padding: 0px 0px 16px">
               <div class="form-floating">
                 <input
                   v-model="member.password"
-                  style="background: #333; border: 0;color:white"
+                  style="background: #333; border: 0; color: white"
                   type="password"
                   class="form-control"
-                  id="floatingPassword"
+                  id="2"
                   placeholder="Password"
                 />
-                <label for="floatingPassword" class="input">รหัสผ่าน</label>
+                <label for="2" class="input">รหัสผ่าน</label>
               </div>
+              <span
+                v-show="isPass"
+                style="
+                  color: #e87c03;
+                  margin-top: 12px;
+                  display: block;
+                  font-size: 13px;
+                "
+                >รหัสผ่านต้องมีจำนวนระหว่าง 4 ถึง 60 อักขระ</span
+              >
             </div>
             <div>
-              <button class="btn" style="color: white; font-weight: 900">
+              <button
+                id="sbmit"
+                class="btn"
+                style="color: white; font-weight: 900"
+              >
                 เข้าสู่ระบบ
-                
               </button>
             </div>
-            <div style="margin-top:30px;color:#737373;">
-              หากยังใหม่กับการใช้ Dedphrik <router-link to="/" class="link">สมัครลงทะเบียน<br>ตอนนี้</router-link>
+            <div style="margin-top: 30px; color: #737373">
+              หากยังใหม่กับการใช้ Dedphrik
+              <router-link to="/" class="link"
+                >สมัครลงทะเบียน<br />ตอนนี้</router-link
+              >
             </div>
           </div>
         </form>
@@ -86,16 +114,27 @@
 .input {
   color: #8c8c8c;
 }
-input:focus{
+input:focus {
   caret-color: white;
 }
-.link{
+.link {
   color: white;
   text-decoration: none;
 }
-.link:hover{
+.link:hover {
   color: white;
   text-decoration: underline;
+}
+.alert {
+  background: #e87c03;
+  color: white;
+  font-size: 14px;
+  line-height: 18px;
+  padding: 10px 20px;
+  vertical-align: center;
+}
+.link2 {
+  color: white;
 }
 .btn {
   margin-top: 24px;
@@ -125,20 +164,45 @@ input:focus{
 }
 </style>
 <script>
-
+import jquery from "jquery";
+import axios from "axios";
 export default {
   data() {
     return {
-      member:{
-        mail:"",
-        password:"",
-      }
-    }
+      member: {
+        mail: "",
+        password: "",
+      },
+      isCorrect: false,
+      isMail: false,
+      isPass: false,
+    };
   },
-  methods:{
-    login(){
-      let apilogin = `http://localhost:4000/api/login/${this.member.mail}/${this.member.password}`
-    }
-  }
+  methods: {
+    login() {
+      let $1 = jquery("#1").val();
+      let $2 = jquery("#2").val();
+      if ($1 == "") {
+        this.isMail = true;
+        jquery("#1").css("border-bottom", "2px solid #e87c03");
+      }
+      if ($2 == "") {
+        this.isPass = true;
+        jquery("#2").css("border-bottom", "2px solid #e87c03");
+      }
+      if ($1 != "" && $2 != "") {
+        let apilogin = `http://localhost:4000/api/login/${this.member.mail}/${this.member.password}`;
+        axios.post(apilogin).then((res) => {
+          if (res.data == null) {
+            this.isCorrect = true;
+          }
+          else{
+            localStorage.setItem('user',JSON.stringify(res.data));
+            this.$router.push('/browse');
+          }
+        });
+      }
+    },
+  },
 };
 </script>
