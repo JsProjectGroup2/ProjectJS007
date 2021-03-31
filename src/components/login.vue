@@ -186,9 +186,17 @@ export default {
         this.isMail = true;
         jquery("#1").css("border-bottom", "2px solid #e87c03");
       }
+      else if ($1 != "") {
+        this.isMail = false;
+        jquery("#1").css("border-bottom", "none");
+      }
       if ($2 == "") {
         this.isPass = true;
         jquery("#2").css("border-bottom", "2px solid #e87c03");
+      }
+      else if ($2 != "") {
+        this.isPass = false;
+        jquery("#2").css("border-bottom", "none");
       }
       if ($1 != "" && $2 != "") {
         let apilogin = `http://localhost:4000/api/login/${this.member.mail}/${this.member.password}`;
