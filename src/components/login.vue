@@ -27,14 +27,14 @@
           height: 550px;
         "
       >
-        <form>
+        <form @submit.prevent="login"> 
           <div>
             <h1 class="h1">เข้าสู่ระบบ</h1>
             <div style="padding: 0px 0px 16px">
               <div class="form-floating">
                 <input
-                  v.model=""
-                  style="background: #333; border: 0"
+                  v-model="member.mail"
+                  style="background: #333; border: 0;color:white"
                   type="email"
                   class="form-control"
                   id="floatingInput"
@@ -48,7 +48,8 @@
             <div style="padding: 0px 0px 16px">
               <div class="form-floating">
                 <input
-                  style="background: #333; border: 0"
+                  v-model="member.password"
+                  style="background: #333; border: 0;color:white"
                   type="password"
                   class="form-control"
                   id="floatingPassword"
@@ -60,6 +61,7 @@
             <div>
               <button class="btn" style="color: white; font-weight: 900">
                 เข้าสู่ระบบ
+                
               </button>
             </div>
             <div style="margin-top:30px;color:#737373;">
@@ -123,6 +125,7 @@ input:focus{
 }
 </style>
 <script>
+
 export default {
   data() {
     return {
@@ -130,7 +133,12 @@ export default {
         mail:"",
         password:"",
       }
-    };
+    }
   },
+  methods:{
+    login(){
+      let apilogin = `http://localhost:4000/api/login/${this.member.mail}/${this.member.password}`
+    }
+  }
 };
 </script>
