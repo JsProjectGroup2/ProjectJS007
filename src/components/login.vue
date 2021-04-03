@@ -6,7 +6,7 @@
           <router-link
             to="/"
             class="navbar-brand"
-            style="display: block; margin-top: 15px; margin-left: 35.5px"
+            style="width:200px;display: block; margin-top: 15px; margin-left: 35.5px"
             href="#"
           >
             <img src="../../img/logo.png" alt="" height="65" />
@@ -178,6 +178,13 @@ export default {
       isPass: false,
     };
   },
+  created(){
+    if(localStorage.getItem("mail") != undefined){
+      this.member.mail = localStorage.getItem("mail");
+    }else{
+      console.log("no");
+    }
+  },
   methods: {
     login() {
       let $1 = jquery("#1").val();
@@ -205,6 +212,7 @@ export default {
             this.isCorrect = true;
           }
           else{
+            localStorage.removeItem("mail");
             localStorage.setItem('user',JSON.stringify(res.data));
             this.$router.push('/browse');
           }

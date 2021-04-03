@@ -1,12 +1,12 @@
 <template>
-  <nav class="position-absolute top-0 start-0 w-100">
+  <nav class="position-absolute top-0 start-0 w-100" style="border-bottom:1px solid #e6e6e6">
     <div class="container-fluid">
       <div class="row">
         <div class="col-6">
           <router-link
             to="/"
             class="navbar-brand"
-            style="display: block; margin-top: 15px; margin-left: 35.5px"
+            style="width:200px;display: block; margin-top: 15px; margin-left: 35.5px"
             href="#"
           >
             <img src="../../img/logo.png" alt="" height="65" />
@@ -16,11 +16,10 @@
           <div class="d-flex align-items-center">
             <router-link
               to="/login"
-              class="btn btn-y"
+              class="btn"
               style="
                 display: block;
-                margin-right: 61px;
-                color: white;
+                margin-right: 45px;
                 padding: 3.8px 16.5px;
               "
               >เข้าสู่ระบบ</router-link
@@ -30,9 +29,14 @@
       </div>
     </div>
   </nav>
-  
+
 </template>
-<style>
+<style scoped>
+.btn{
+  color: black;
+  font-size: 19px;
+  font-weight: 700;
+}
 .text1 {
   color: white;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -51,9 +55,6 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 1.2rem;
   /*font-weight: 900;*/
-}
-.btn-y {
-  background: #ff4f00;
 }
 .gradiant {
   width: 100%;
@@ -75,10 +76,10 @@
 </style>
 <script>
 export default {
-  data(){
-    return{
-      email:this.$route.params.email
-    }
-  }
-}
+  data() {
+    return {
+      email: this.$route.params.email,
+    };
+  },
+};
 </script>

@@ -6,7 +6,7 @@
           <router-link
             to="/"
             class="navbar-brand"
-            style="display: block; margin-top: 15px; margin-left: 35.5px"
+            style="width:200px;display: block; margin-top: 15px; margin-left: 35.5px"
             href="#"
           >
             <img src="../../img/logo.png" alt="" height="65" />
@@ -51,11 +51,22 @@
                 style="height: 70px"
                 type="email"
                 class="form-control"
-                id="floatingInput"
+                id="1"
                 placeholder="name@example.com"
               />
-              <label for="floatingInput">ที่อยู่อีเมล</label>
+              <label for="1">ที่อยู่อีเมล</label>
+              <span
+                v-show="isMail"
+                style="
+                  color: #e87c03;
+                  margin-top: 3px;
+                  display: block;
+                  font-size: 16px;
+                "
+                >ต้องป้อนอีเมล!</span
+              >
             </div>
+
             <button
               class="btn btn-primary"
               style="width: 30%; font-size: 1.875rem; background: #ff4f00"
@@ -68,7 +79,7 @@
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 .text1 {
   color: white;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -110,18 +121,37 @@
 }
 </style>
 <script>
+import jquery from "jquery";
+import axios from "axios";
 export default {
   data() {
     return {
       member: {
         mail: "",
       },
+      isMail: false,
     };
   },
-  methods:{
-      Sentmail(){
-        this.$router.push({name:'signup',params:{email:this.member.mail}})
+  methods: {
+    Sentmail() {
+      let $1 = jquery("#1").val();
+      if ($1 == "") {
+        this.isMail = true;
+        jquery("#1").css("border-bottom", "2px solid #e87c03");
+      } else {
+        axios
+          .post(`http://localhost:4000/api/${this.member.mail}`)
+          .then((tmail) => {
+            if (tmail.data != null) {
+              localStorage.setItem("mail",this.member.mail)
+              this.$router.push("/login");
+            } else {
+              localStorage.setItem("regismail",this.member.mail)
+              this.$router.push("/signup/regis");
+            }
+          });
       }
-  }
+    },
+  },
 };
 </script>
