@@ -44,7 +44,7 @@
           หากพร้อมรับชม ป้อนอีเมลเพื่อสร้างหรือเริ่มต้นการเป็นสมาชิกอีกครั้ง
         </div>
         <div class="d-flex flex-row">
-          <form @submit.prevent="" class="w-100 d-flex">
+          <form @submit.prevent="Sentmail" class="w-100 d-flex">
             <div class="form-floating" style="width: 70%; height: 70px">
               <input
                 v-model="member.mail"
@@ -120,7 +120,7 @@ export default {
   },
   methods:{
       Sentmail(){
-        
+        this.$router.push({name:'signup',params:{email:this.member.mail}})
       }
   }
 };
