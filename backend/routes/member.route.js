@@ -3,6 +3,19 @@ const memberRoute = express.Router();
 
 let MemberModel = require("../models/Member");
 
+memberRoute.route("/:mail").post((req, res, next)=>{
+  MemberModel.findOne({
+    mail: req.params.mail,
+  },
+    (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.json(data);
+      }
+    })
+});
+
 memberRoute.route("/create-member").post((req, res, next) => {
   MemberModel.create(req.body, (error, data) => {
     if (error) {
@@ -27,7 +40,18 @@ memberRoute.route("/login/:mail/:password").post((req, res, next) => {
     })
 });
 
-memberRoute.route("/:mail").post((req, res, next)=>{
+
+memberRoute.route("/signup").post((req, res, next)=>{
+  MemberModel.create(req.body,(error,data)=>{
+    if (error) {
+      return next(error);
+    } else {
+      res.json(data);
+    }
+  })
+});
+
+memberRoute.route("/signup/:mail").post((req, res, next)=>{
   MemberModel.findOne({
     mail: req.params.mail,
   },
@@ -39,5 +63,7 @@ memberRoute.route("/:mail").post((req, res, next)=>{
       }
     })
 });
+
+
 
 module.exports = memberRoute;
