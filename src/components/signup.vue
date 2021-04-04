@@ -182,7 +182,6 @@ export default {
   data() {
     return {
       member: {
-        isAdmin: false,
         mail: localStorage.getItem("regismail"),
         tel: "",
         password: "",
@@ -226,7 +225,7 @@ export default {
           if (res.data != null) {
             jquery("#err").fadeIn();
           } else {
-            let apiregis = `http://localhost:4000/api/signuppac`;
+            let apiregis = 'http://localhost:4000/api/pacage';
             axios.post(apiregis, this.member).then((memberr) => {
               console.log(memberr);
               //this.$router.push('/pacage');

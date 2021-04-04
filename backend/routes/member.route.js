@@ -31,7 +31,7 @@ memberRoute.route("/login/:mail/:password").post((req, res, next) => {
 });
 
 
-memberRoute.route("/signuppac").post((req, res, next)=>{
+memberRoute.route("/pacage").post((req, res, next)=>{
   MemberModel.create(req.body,(error,data)=>{
     if (error) {
       return next(error);
