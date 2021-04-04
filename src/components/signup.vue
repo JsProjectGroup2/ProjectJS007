@@ -33,11 +33,7 @@
       </div>
     </div>
   </nav>
-  <div
-    id="first"
-    class="position-absolute top-50 start-50 translate-middle"
-
-  >
+  <div id="first" class="position-absolute top-50 start-50 translate-middle">
     <div class="text-center">
       <img
         src="../../img/Devices.png
@@ -60,13 +56,13 @@
       ได้ทุกเวลาไม่ว่า<br />ในอุปกรณ์ใด
     </div>
     <div class="text-center">
-      <button @click="reform" id="sbmit" class="btn2">เข้าสู่ระบบ</button>
+      <button @click="reform" id="sbmit" class="btn2">ดำเนินการต่อ</button>
     </div>
   </div>
   <div
     id="sec"
     class="position-absolute top-50 start-50 translate-middle"
-    style="display:none"
+    style="display: none"
   >
     <div
       id="err"
@@ -91,7 +87,7 @@
         </div>
       </div>
     </div>
-    <div style="font-size: 13px">ขั้นตอน <b>1</b> จาก <b>3</b></div>
+    <div style="font-size: 13px">ขั้นตอน <b>2</b> จาก <b>3</b></div>
     <div style="font-size: 23px; font-weight: 1000; margin-bottom: 9.2px">
       สร้างรหัสผ่านเพื่อเริ่มต้นการเป็นสมาชิก
     </div>
@@ -169,6 +165,7 @@
   font-size: 19px;
   font-weight: 700;
 }
+
 .form-control {
   border-radius: 2px;
   border-width: 0.1px;
@@ -192,11 +189,26 @@ export default {
       },
       isMail: false,
       isPass: false,
-      
+      Interval:null
     };
   },
   methods: {
-
+    proces() {
+      clearInterval(this.Interval);
+      let apicheck = `http://192.168.0.131:4000/api/signup/${this.member.mail}`;
+      axios.post(apicheck).then((res) => {
+        if (res.data != null) {
+          jquery("#err").fadeIn();
+        } else {
+          let apiregis = "http://192.168.0.131:4000/api/create-member/";
+          axios.post(apiregis, this.member).then(() => {
+            localStorage.removeItem('regismail')
+            localStorage.setItem('mail',this.member.mail)
+            this.$router.push("/pacage");
+          });
+        }
+      });
+    },
     reform() {
       jquery("#first").fadeOut();
       jquery("#sec").delay(500).fadeIn();
@@ -214,24 +226,10 @@ export default {
         this.isPass = true;
         jquery("#2").css("border-color", "#e87c03");
       }
+      
       if ($1 != "" && $2 != "") {
-        this.isMail = false;
-        jquery("#1").css("border-color", "#8c8c8c");
-        this.isPass = false;
-        jquery("#2").css("border-color", "#8c8c8c");
-        
-        let apicheck = `http://localhost:4000/api/signup/${this.member.mail}`;
-        axios.post(apicheck).then((res) => {
-          if (res.data != null) {
-            jquery("#err").fadeIn();
-          } else {
-            let apiregis = 'http://localhost:4000/api/pacage';
-            axios.post(apiregis, this.member).then((memberr) => {
-              console.log(memberr);
-              //this.$router.push('/pacage');
-            });
-          }
-        });
+        jquery("#sec").fadeOut();
+        this.Interval = setInterval(this.proces,250)
       }
     },
   },
