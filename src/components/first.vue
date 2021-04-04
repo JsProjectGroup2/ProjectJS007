@@ -66,8 +66,8 @@
                 >ต้องป้อนอีเมล!</span
               >
             </div>
-
             <button
+            
               class="btn btn-primary"
               style="width: 30%; font-size: 1.875rem; background: #ff4f00"
             >
@@ -147,7 +147,7 @@ export default {
               this.$router.push("/login");
             } else {
               localStorage.setItem("regismail",this.member.mail)
-              this.$router.push("/signup/regis");
+              this.$router.push("/signup");
             }
           });
       }
