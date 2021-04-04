@@ -36,7 +36,7 @@
   <div
     id="first"
     class="position-absolute top-50 start-50 translate-middle"
-    style="display: none"
+
   >
     <div class="text-center">
       <img
@@ -66,7 +66,7 @@
   <div
     id="sec"
     class="position-absolute top-50 start-50 translate-middle"
-    style=""
+    style="display:none"
   >
     <div
       id="err"
@@ -226,9 +226,10 @@ export default {
           if (res.data != null) {
             jquery("#err").fadeIn();
           } else {
-            let apiregis = `http://localhost:4000/api/signup`;
-            axios.post(apiregis, this.member).then((meberr) => {
-              console.log(meberr.data);
+            let apiregis = `http://localhost:4000/api/signuppac`;
+            axios.post(apiregis, this.member).then((memberr) => {
+              console.log(memberr);
+              //this.$router.push('/pacage');
             });
           }
         });
