@@ -6,7 +6,12 @@
           <router-link
             to="/"
             class="navbar-brand"
-            style="width:200px;display: block; margin-top: 15px; margin-left: 35.5px"
+            style="
+              width: 200px;
+              display: block;
+              margin-top: 15px;
+              margin-left: 35.5px;
+            "
             href="#"
           >
             <img src="../../img/logo.png" alt="" height="65" />
@@ -179,10 +184,19 @@ export default {
       isPass: false,
     };
   },
-  created(){
-    if(localStorage.getItem("mail") != undefined){
+  created() {
+    if (localStorage.getItem("setlogin")) {
+      //this.$router.push("/browse")
+      let mmm = JSON.parse(localStorage.getItem("accountmem"));
+      if (mmm.package == 0) {
+        this.$router.push("/pacage");
+      } else {
+        this.$router.push("/browse");
+      }
+    }
+    if (localStorage.getItem("mail") != undefined) {
       this.member.mail = localStorage.getItem("mail");
-    }else{
+    } else {
       console.log("no");
     }
   },
@@ -193,16 +207,14 @@ export default {
       if ($1 == "") {
         this.isMail = true;
         jquery("#1").css("border-bottom", "2px solid #e87c03");
-      }
-      else if ($1 != "") {
+      } else if ($1 != "") {
         this.isMail = false;
         jquery("#1").css("border-bottom", "none");
       }
       if ($2 == "") {
         this.isPass = true;
         jquery("#2").css("border-bottom", "2px solid #e87c03");
-      }
-      else if ($2 != "") {
+      } else if ($2 != "") {
         this.isPass = false;
         jquery("#2").css("border-bottom", "none");
       }
@@ -211,11 +223,15 @@ export default {
         axios.post(apilogin).then((res) => {
           if (res.data == null) {
             this.isCorrect = true;
-          }
-          else{
+          } else {
+            localStorage.setItem("setlogin", true);
             localStorage.removeItem("mail");
-            localStorage.setItem('user',JSON.stringify(res.data));
-            this.$router.push('/browse');
+            localStorage.setItem("accountmem", JSON.stringify(res.data));
+            if (res.data.isAdmin == true) {
+              this.$router.push("/admin");
+            } else {
+              this.$router.push("/browse");
+            }
           }
         });
       }

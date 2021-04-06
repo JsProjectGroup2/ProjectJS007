@@ -99,6 +99,8 @@ export default {
   },
   created() {
     localStorage.removeItem("user");
+    localStorage.removeItem("setlogin");
+    localStorage.removeItem("accountmem");
     this.Interval = setInterval(this.logoutt, 30000);
   },
   methods: {

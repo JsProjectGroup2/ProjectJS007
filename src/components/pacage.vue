@@ -172,6 +172,7 @@
 import axios from "axios";
 import jquery from "jquery";
 export default {
+
   data() {
     return {
       id: "",
@@ -181,6 +182,10 @@ export default {
     jquery("#first").delay(250).fadeIn();
   },
   created() {
+    let x = JSON.parse(localStorage.getItem('accountmem'))
+    if(x.package == 1){
+      this.$router.push('/browse')
+    }
     let chmail = localStorage.getItem("mail");
     axios.post(`http://localhost:4000/api//signup/${chmail}`).then((bn) => {
       this.id = bn.data;
@@ -194,6 +199,7 @@ export default {
       axios.put(api, this.id).then((flert) => {
         if (flert.data != null) {
           this.$swal.fire("ชำระเงินเสร็จสิ้น !", "ขอให้สนุกกับบริการของเรา", "success").then(() => {
+            localStorage.setItem('accountmem',JSON.stringify(flert.data))
               this.$router.push("/browse");
             });
         }

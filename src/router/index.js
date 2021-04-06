@@ -4,6 +4,7 @@ import login from "@/components/login.vue";
 import logout from "@/components/logout.vue";
 import signup from "@/components/signup.vue";
 import pacage from "@/components/pacage.vue";
+import admin from "@/components/admin.vue";
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path:"/logout",
     name:"logout",
     component: logout,
+  },
+  {
+    path:"/admin",
+    name:"admin",
+    component: admin,
   },
 ];
 

@@ -176,6 +176,11 @@
 import axios from "axios";
 import jquery from "jquery";
 export default {
+  created(){
+      if(localStorage.getItem('setlogin')){
+        this.$router.push("/pacage")
+      }
+    },
   data() {
     return {
       member: {
@@ -193,6 +198,7 @@ export default {
     };
   },
   methods: {
+    
     proces() {
       clearInterval(this.Interval);
       let apicheck = `http://192.168.0.131:4000/api/signup/${this.member.mail}`;
@@ -201,9 +207,11 @@ export default {
           jquery("#err").fadeIn();
         } else {
           let apiregis = "http://192.168.0.131:4000/api/create-member/";
-          axios.post(apiregis, this.member).then(() => {
+          axios.post(apiregis, this.member).then((abc) => {
             localStorage.removeItem('regismail')
             localStorage.setItem('mail',this.member.mail)
+             localStorage.setItem('setlogin',true)
+             localStorage.setItem('accountmem',JSON.stringify(abc.data))
             this.$router.push("/pacage");
           });
         }

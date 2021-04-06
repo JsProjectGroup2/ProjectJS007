@@ -124,6 +124,17 @@
 import jquery from "jquery";
 import axios from "axios";
 export default {
+  created(){
+    if(localStorage.getItem('setlogin')){
+        //this.$router.push("/browse")
+        let mmm=JSON.parse(localStorage.getItem('accountmem'))
+        if(mmm.package==0){
+          this.$router.push("/pacage")
+        }else{
+          this.$router.push("/browse")
+        }
+      }
+  },
   data() {
     return {
       member: {
