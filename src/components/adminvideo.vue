@@ -156,7 +156,7 @@
                     <tbody align="center">
                         <tr  v-for="bases in base" :key="bases._id">
                             <td>{{bases.thumbnail}}</td>
-                            <td>{{bases.name}}</td>
+                            <td>{{bases.vname}}</td>
                             <td>{{bases.score}}</td>
                             <td>{{bases.category}}</td>
                             <td>
@@ -182,11 +182,16 @@
             </div>
             <div class="col-6 mb-3">
                 <label for="video_name" class="form-label">ชื่อวิดีโอ</label>
-                <input type="text" class="form-control" v-model="video.name">
+                <input type="text" class="form-control" v-model="video.vname">
+                {{video.vname}}
             </div>
             <div class="col-12 mb-3">
                 <label for="des" class="form-label">รายละเอียด</label>
                 <textarea name="des" id="des" cols="30" rows="10" class="form-control" v-model="video.des"></textarea>
+            </div>
+            <div class="col-12 mb-3">
+              <label for="" class="form-label">IMDB</label>
+              <input type="text" v-model='video.score' class="form-control">
             </div>
             <div class="col-4 mb-3">
                 <label for="category" class="form-label">ประเภท</label>
@@ -227,7 +232,7 @@ export default {
             base:"",
             video:{
                 thumbnail:'',
-                name:'',
+                vname:'',
                 score:'',
                 des:'',
                 category:'',
@@ -238,20 +243,18 @@ export default {
         }
     },
     created(){
-        axios.get('http://localhost:4000/vidapi/').then(sad=>{
-            this.base=sad.data
-        })
+      axios.get("http://localhost:4000/vidapi/").then((res)=>{
+        this.base = res.data;
+      })
     },
     methods:{
         AddVideo(){
-            this.thumbnail = this.$refs.file.files[0].name
-            console.log(this.$refs.file.files[0]);
+            this.video.thumbnail = this.$refs.file.files[0].name
             this.upload = this.$refs.file.files[0]
             const formData = new FormData()
-
             formData.append('file',this.upload)
             axios.post('http://localhost:4000/upload',formData).then(()=>{
-                axios.post('http://localhost:4000/viapi/create-video',this.video).then(()=>{
+                axios.post('http://localhost:4000/vidapi/create-video',this.video).then(()=>{
                     this.$swal.fire("เพิ่มวีดีโอสำเร็จ",'เย้ !','successs')
                     this.video={
                         thumbnail:'',

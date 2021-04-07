@@ -5,7 +5,7 @@ let videoSchema = new Schema({
     thumbnail:{
         type:String
     },
-    name:{
+    vname:{
         type:String
     },
     score:{

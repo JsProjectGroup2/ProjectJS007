@@ -154,7 +154,7 @@ export default {
         jquery("#1").css("border-bottom", "2px solid #e87c03");
       } else {
         axios
-          .post(`http://192.168.0.131:4000/api/${this.member.mail}`)
+          .post(`http://localhost:4000/api/${this.member.mail}`)
           .then((tmail) => {
             if (tmail.data != null) {
               localStorage.setItem("mail",this.member.mail)
