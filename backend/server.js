@@ -24,7 +24,7 @@ const upload = multer({
         destination:(req,file,cb)=>{
             cb(null,'../public/Thumbnail/');
         },
-        filename:(req,res,cb)=>{
+        filename:(req,file,cb)=>{
             let newfile = file.originalname;
             cb(null,newfile)
         }
