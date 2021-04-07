@@ -12,14 +12,14 @@
               margin-top: 15px;
               margin-left: 35.5px;
             "
-            href="#"
           >
             <img src="../../img/logo.png" alt="" height="65" />
           </router-link>
         </div>
         <div class="col d-flex justify-content-end">
           <div class="d-flex align-items-center">
-            <router-link
+            <button
+
               @click="loginz"
               class="btn btn-y"
               style="
@@ -28,7 +28,7 @@
                 color: white;
                 padding: 3.8px 16.5px;
               "
-              >เข้าสู่ระบบ</router-link
+              >เข้าสู่ระบบ</button
             >
           </div>
         </div>

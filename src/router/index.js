@@ -5,6 +5,10 @@ import logout from "@/components/logout.vue";
 import signup from "@/components/signup.vue";
 import pacage from "@/components/pacage.vue";
 import admin from "@/components/admin.vue";
+import adminuser from "@/components/adminuser.vue";
+import adminview from "@/components/adminview.vue";
+import adminvideo from "@/components/adminvideo.vue";
+import Editvid from  "@/components/Editvid.vue";
 
 const routes = [
   {
@@ -36,6 +40,26 @@ const routes = [
     path:"/admin",
     name:"admin",
     component: admin,
+  },
+  {
+    path:"/admin/user",
+    name:"adminuser",
+    component: adminuser,
+  },
+  {
+    path:"/admin/view",
+    name:"adminview",
+    component: adminview,
+  },
+  {
+    path:"/admin/video",
+    name:"adminvideo",
+    component: adminvideo,
+  },
+  {
+    path:"/admin/video/Editvid/:id",
+    name:"Editvid",
+    component: Editvid,
   },
 ];
 
