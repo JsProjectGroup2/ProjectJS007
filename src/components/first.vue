@@ -130,7 +130,10 @@ export default {
         let mmm=JSON.parse(localStorage.getItem('accountmem'))
         if(mmm.package==0){
           this.$router.push("/pacage")
-        }else{
+        }else if(mmm.isAdmin==true){
+          this.$router.push("/admin")
+        }
+        else{
           this.$router.push("/browse")
         }
       }

@@ -20,7 +20,7 @@
         <div class="col d-flex justify-content-end">
           <div class="d-flex align-items-center">
             <router-link
-              @click="loginn"
+              @click="loginz"
               class="btn btn-y"
               style="
                 display: block;
@@ -104,11 +104,11 @@ export default {
     this.Interval = setInterval(this.logoutt, 30000);
   },
   methods: {
-    loginn() {
+    loginz() {
       clearInterval(this.Interval);
       this.$router.push("/login");
     },
-    logoutt() {
+    logoutz() {
       clearInterval(this.Interval);
       this.$router.push("/");
     },
@@ -116,7 +116,3 @@ export default {
 };
 </script>
 
-//ต้องการออกจากระบบใช่ไหม
-โปรดทราบว่าคุณไม่จำเป็นต้องออกจากระบบของ Netflix ทุกครั้ง แต่อาจต้องดำเนินการดังกล่าวเมื่อใช้คอมพิวเตอร์สาธารณะหรือคอมพิวเตอร์ที่ใช้ร่วมกันเท่านั้น
-
-ระบบจะเปลี่ยนเส้นทางไปที่หน้าหลักของ Netflix ใน 30 วินาที

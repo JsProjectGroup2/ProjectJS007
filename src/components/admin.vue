@@ -42,10 +42,8 @@
 
       <ul class="list-unstyled CTAs">
         <li>
-          <a
-            href="https://bootstrapious.com/tutorial/files/sidebar.zip"
-            class="download"
-            >ออกจากระบบ</a
+          <router-link to="/logout"
+            >ออกจากระบบ</router-link
           >
         </li>
         
