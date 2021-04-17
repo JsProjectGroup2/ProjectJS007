@@ -129,93 +129,128 @@
           <div class="row">
             <div class="col-6" style="padding-left: 30px">
               ค้นหาข้อมูลด้วยชื่อหนัง
-              <input type="text" class="form-control" placeholder="ค้นหา" v-model="search">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="ค้นหา"
+                v-model="search"
+              />
             </div>
             <div class="col-6" style="padding-left: 30px">
               เลือกประเภทของหนัง
               <select class="form-select" v-model="cate">
-                  <option>รายการทีวี</option>
-                  <option>คอมเมดี้</option>
-                  <option>แอ็คชั่น</option>
-                  <option>ผจญภัย</option>
-                  <option>สยองขวัญ</option>
+                <option>รายการทีวี</option>
+                <option>คอมเมดี้</option>
+                <option>แอ็คชั่น</option>
+                <option>ผจญภัย</option>
+                <option>สยองขวัญ</option>
               </select>
             </div>
 
-            <div class="col-12 mt-3" style="height:500px;overflow-y:scroll">
-                <table class="table table-hover table-dark ">
-                    <thead>
-                        <tr align="center">
-                            <th>ปกวิดีโอ</th>
-                            <th>ชื่อวิดีโอ</th>
-                            <th>คะแนน</th>
-                            <th>ประเภท</th>
-                            <th>แก้ไข/ลบ</th>
-                        </tr>
-                    </thead>
-                    <tbody align="center">
-                        <tr  v-for="bases in base" :key="bases._id">
-                            <td>{{bases.thumbnail}}</td>
-                            <td>{{bases.vname}}</td>
-                            <td>{{bases.score}}</td>
-                            <td>{{bases.category}}</td>
-                            <td>
-                                <router-link class="btn btn-warning" style="margin-right:1rem;" :to="{name:'Editvid',params:{id:bases._id}}">แก้ไข</router-link>
-                                <button type="button" @click.prevent="delvid(bases._id)" class="btn btn-danger">ลบ</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="col-12 mt-3" style="height: 500px; overflow-y: scroll">
+              <table class="table table-hover table-dark">
+                <thead>
+                  <tr align="center">
+                    <th>ปกวิดีโอ</th>
+                    <th>ชื่อวิดีโอ</th>
+                    <th>คะแนน</th>
+                    <th>ประเภท</th>
+                    <th>แก้ไข/ลบ</th>
+                  </tr>
+                </thead>
+                <tbody align="center">
+                  <tr v-for="bases in base" :key="bases._id">
+                    <td>{{ bases.thumbnail }}</td>
+                    <td>{{ bases.vname }}</td>
+                    <td>
+                      <div id="app" v-html="bases.score"></div>
+                    </td>
+                    <td>{{ bases.category }}</td>
+                    <td>
+                      <router-link
+                        class="btn btn-warning"
+                        style="margin-right: 1rem"
+                        :to="{ name: 'Editvid', params: { id: bases._id } }"
+                        >แก้ไข</router-link
+                      >
+                      <button
+                        type="button"
+                        @click.prevent="delvid(bases._id)"
+                        class="btn btn-danger"
+                      >
+                        ลบ
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
       <form @submit.prevent="AddVideo" enctype="multipart/form-data">
         <div class="row">
-            <div class="col-12 mt-3">
-                <p style="font-size: 22px; padding-left: 1rem" >เพิ่มวีดีโอ</p>
-                    <hr />
+          <div class="col-12 mt-3">
+            <p style="font-size: 22px; padding-left: 1rem">เพิ่มวีดีโอ</p>
+            <hr />
+          </div>
+          <div class="col-6 mb-3">
+            <label for="file" class="form-label">รูปปกวีดีโอ</label>
+            <input type="file" id="file" ref="file" class="form-control" />
+          </div>
+          <div class="col-6 mb-3">
+            <label for="video_name" class="form-label">ชื่อวิดีโอ</label>
+            <input type="text" class="form-control" v-model="video.vname" />
+            {{ video.vname }}
+          </div>
+          <div class="col-12 mb-3">
+            <label for="des" class="form-label">รายละเอียด</label>
+            <textarea
+              name="des"
+              id="des"
+              cols="30"
+              rows="10"
+              class="form-control"
+              v-model="video.des"
+            ></textarea>
+          </div>
+          <div class="col-12 mb-3">
+            <label for="" class="form-label">IMDB</label>
+            <input type="text" v-model="video.score" class="form-control" />
+          </div>
+          <div class="col-4 mb-3">
+            <label for="category" class="form-label">ประเภท</label>
+            <select
+              name="category"
+              id="category"
+              class="form-select"
+              v-model="video.category"
+            >
+              <option>รายการทีวี</option>
+              <option>คอมเมดี้</option>
+              <option>แอ็คชั่น</option>
+              <option>ผจญภัย</option>
+              <option>สยองขวัญ</option>
+            </select>
+          </div>
+          <div class="col-6 mb-3">
+            <label for="videolink" class="form-label">ลิงค์วีดีโอ</label>
+            <input type="text" class="form-control" v-model="video.videolink" />
+          </div>
+          <div class="col-2 mb-3">
+            <label for="videolink" class="form-label">ปีที่ฉาย</label>
+            <input
+              type="text"
+              class="form-control"
+              maxlength="4"
+              v-model="video.year"
+            />
+          </div>
+          <div class="col-12 mb-5 d-flex justify-content-center">
+            <div class="col-4">
+              <button class="btn btn-success form-control">เพิ่มวีดีโอ</button>
             </div>
-            <div class="col-6 mb-3">
-                <label for="file" class="form-label">รูปปกวีดีโอ</label>
-                <input type="file" id="file" ref="file" class="form-control">
-            </div>
-            <div class="col-6 mb-3">
-                <label for="video_name" class="form-label">ชื่อวิดีโอ</label>
-                <input type="text" class="form-control" v-model="video.vname">
-                {{video.vname}}
-            </div>
-            <div class="col-12 mb-3">
-                <label for="des" class="form-label">รายละเอียด</label>
-                <textarea name="des" id="des" cols="30" rows="10" class="form-control" v-model="video.des"></textarea>
-            </div>
-            <div class="col-12 mb-3">
-              <label for="" class="form-label">IMDB</label>
-              <input type="text" v-model='video.score' class="form-control">
-            </div>
-            <div class="col-4 mb-3">
-                <label for="category" class="form-label">ประเภท</label>
-                <select name="category" id="category" class="form-select" v-model="video.category">
-                   <option>รายการทีวี</option>
-                  <option>คอมเมดี้</option>
-                  <option>แอ็คชั่น</option>
-                  <option>ผจญภัย</option>
-                  <option>สยองขวัญ</option>
-                </select>
-            </div>
-            <div class="col-6 mb-3">
-                <label for="videolink" class="form-label">ลิงค์วีดีโอ</label>
-                <input type="text" class="form-control" v-model="video.videolink">
-            </div>
-            <div class="col-2 mb-3">
-                <label for="videolink" class="form-label">ปีที่ฉาย</label>
-                <input type="text" class="form-control" maxlength="4" v-model="video.year">
-            </div>
-            <div class="col-12 mb-5 d-flex justify-content-center">
-               <div class="col-4">
-                    <button class="btn btn-success form-control">เพิ่มวีดีโอ</button>
-               </div>
-            </div>
+          </div>
         </div>
       </form>
     </div>
@@ -224,50 +259,53 @@
 <style scoped>
 </style>
 <script>
-import axios from 'axios'
+import axios from "axios";
+//import jquery from 'jquery'
 export default {
-    data(){
-        return{
-            cate:"",
-            base:"",
-            video:{
-                thumbnail:'',
-                vname:'',
-                score:'',
-                des:'',
-                category:'',
-                videolink:'',
-                year:''
-            },
-            upload:''
-        }
+  data() {
+    return {
+      cate: "",
+      base: "",
+      video: {
+        thumbnail: "",
+        vname: "",
+        score: "",
+        des: "",
+        category: "",
+        videolink: "",
+        year: "",
+      },
+      upload: "",
+    };
+  },
+  created() {
+    axios.get("http://localhost:4000/vidapi/").then((res) => {
+      this.base = res.data;
+    });
+  },
+  methods: {
+    AddVideo() {
+      this.video.thumbnail = this.$refs.file.files[0].name;
+      this.upload = this.$refs.file.files[0];
+      const formData = new FormData();
+      formData.append("file", this.upload);
+      axios.post("http://localhost:4000/upload", formData).then(() => {
+        axios
+          .post("http://localhost:4000/vidapi/create-video", this.video)
+          .then(() => {
+            this.$swal.fire("เพิ่มวีดีโอสำเร็จ", "เย้ !", "successs");
+            this.video = {
+              thumbnail: "",
+              name: "",
+              score: "",
+              des: "",
+              category: "",
+              videolink: "",
+              year: "",
+            };
+          });
+      });
     },
-    created(){
-      axios.get("http://localhost:4000/vidapi/").then((res)=>{
-        this.base = res.data;
-      })
-    },
-    methods:{
-        AddVideo(){
-            this.video.thumbnail = this.$refs.file.files[0].name
-            this.upload = this.$refs.file.files[0]
-            const formData = new FormData()
-            formData.append('file',this.upload)
-            axios.post('http://localhost:4000/upload',formData).then(()=>{
-                axios.post('http://localhost:4000/vidapi/create-video',this.video).then(()=>{
-                    this.$swal.fire("เพิ่มวีดีโอสำเร็จ",'เย้ !','successs')
-                    this.video={
-                        thumbnail:'',
-                        name:'',
-                        score:'',
-                        des:'',
-                        category:'',
-                        videolink:'',
-                        year:''
-                    }
-                })
-            })
-        }
-    }
+  },
 };
 </script>

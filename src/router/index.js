@@ -9,6 +9,7 @@ import adminuser from "@/components/adminuser.vue";
 import adminview from "@/components/adminview.vue";
 import adminvideo from "@/components/adminvideo.vue";
 import Editvid from  "@/components/Editvid.vue";
+import browse from "@/components/browse.vue";
 
 const routes = [
   {
@@ -60,6 +61,11 @@ const routes = [
     path:"/admin/video/Editvid/:id",
     name:"Editvid",
     component: Editvid,
+  },
+  {
+    path:"/browse",
+    name:"browse",
+    component: browse,
   },
 ];
 

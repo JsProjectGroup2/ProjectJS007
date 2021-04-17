@@ -87,7 +87,6 @@
             </div>
             <div>
               <button
-                id="sbmit"
                 class="btn"
                 style="color: white; font-weight: 900"
               >

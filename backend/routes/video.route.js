@@ -23,4 +23,14 @@ videoRoute.route("/").get((req, res, next) => {
   });
 });
 
+videoRoute.route("/getvid/:category").get((req, res, next) => {
+  VideoModel.find({category:req.params.category},(error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.json(data);
+    }
+  });
+});
+
 module.exports = videoRoute;
