@@ -1,4 +1,4 @@
-<template >
+<template>
   <nav style="z-index: 4" class="position-absolute top-0 start-0 w-100">
     <div class="container-fluid">
       <div class="row">
@@ -55,12 +55,96 @@
       ></div>
     </div>
 
+    <div id="pop" style="display: none">
+      <a @click="close" style="position:absolute;top:0;z-index:0;width:100%;height:100vh;">
+        
+      </a>
+      <div
+        class="position-absolute top-50 start-50 translate-middle"
+        style="
+          
+          width: 850px;
+          border: 0px solid #181818;
+          border-radius: 25px;
+          background-color: #181818;
+        "
+      >
+        <iframe
+        style="border: 0px solid ;border-top-left-radius: 25px;border-top-right-radius: 25px;"
+          id="clipz"
+          width="850"
+          height="478"
+          src="https://www.youtube.com/embed/sEOuJ4z5aTc?playlist=sEOuJ4z5aTc&controls=0"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+
+        <div
+          class="gradiant-1"
+          style="position: absolute; z-index: 1; top: 0"
+        ></div>
+
+        <div style="padding: 25px 48px">
+          <div style="margin-top: -250px; position: absolute; z-index: 2">
+            <div>
+              <img
+                src="../../img/Brooklyn_Nine-Nine_Logo.png"
+                alt=""
+                style="width: 250px"
+              />
+            </div>
+            <div class="mt-4">
+              <a
+                href="https://www.youtube.com/embed/sEOuJ4z5aTc?autoplay=1"
+                class="btn btn-j"
+                style="
+                  height: 42px;
+                  width: 150px;
+                  font-weight: 900;
+                  font-size: 20px;
+                "
+              >
+                <img src="../../img/play1.png" style="width: 35px" alt="" />
+                เล่น
+              </a>
+              <a
+              target="_blank"
+                href="https://www.imdb.com/title/tt2467372/?ref_=nv_sr_srsg_0"
+              >
+                <img src="../../img/imdb.png" style="height: 42px" alt="" />
+              </a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div style="font-size: 18px; color: white">
+                เจค เพอราลต้า นักสืบหัวไวยอดเกรียนแห่งสถานีตำรวจบรู๊คลินต้องเรียนรู้การทำตามกฎและเป็นผู้ร่วมทีมที่ดีเมื่อทีมของเขามีผู้กองคนใหม่ผู้เข้มงวดเข้ามาคุม
+              </div>
+            </div>
+            <div class="col-4">
+              <span
+                class="imdbRatingPlugin"
+                data-user="ur131175552"
+                data-title="tt2467372"
+                data-style="p2"
+                >
+              ></span>
+            </div>
+          </div>
+
+          <div style="font-size: 18px; color: white"></div>
+        </div>
+      </div>
+    </div>
+
     <div class="content text-white">
       <div class="container-fluid">
-        <div style="padding-left: 2.3rem;margin-bottom:100px">
+        <div style="padding-left: 2.3rem; margin-bottom: 100px">
           <div class="lf">
             <img
-              style="width: 270px;"
+              style="width: 270px"
               src="../../img/Brooklyn_Nine-Nine_Logo.png"
               alt=""
             />
@@ -68,7 +152,12 @@
           <div class="lf mt-5">
             <button
               class="btn btn-j"
-              style="height:56px;width: 147px; font-weight: 900; font-size: 20px"
+              style="
+                height: 56px;
+                width: 147px;
+                font-weight: 900;
+                font-size: 20px;
+              "
             >
               <img src="../../img/play1.png" style="width: 45px" alt="" />
               เล่น
@@ -184,7 +273,6 @@
             </vueper-slides>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -241,23 +329,35 @@
     rgba(0, 0, 0, 0.8) 94%
   );
 }
+.gradiant-1 {
+  width: 100%;
+  height: 480px;
+  background: linear-gradient(0deg, rgba(24,24,24,1) 0%, rgba(255,255,255,0) 50%);
+}
 .bg {
   width: 100%;
   height: 100vh;
 }
-
 </style>
 <script>
-//import jquery from "jquery";
+import jquery from "jquery";
 import axios from "axios";
 import { VueperSlides, VueperSlide } from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
 export default {
   components: { VueperSlides, VueperSlide },
   methods: {
-    infor(){
-      document.getElementById('Vidy').pause();
+    infor() {
       
+      jquery("#Vidy").trigger("pause");
+      jquery("#clipz")[0].src += "&autoplay=1&loop=1";
+      jquery("#pop").fadeIn();  
+      window.scrollTo(0,0);
+    },
+    close(){
+      jquery("#Vidy").trigger("play");
+      jquery("#clipz")[0].src = "https://www.youtube.com/embed/sEOuJ4z5aTc?playlist=sEOuJ4z5aTc&controls=0";
+      jquery("#pop").fadeOut(); 
     }
   },
   data() {
@@ -269,7 +369,7 @@ export default {
       hr: [],
     };
   },
-  
+
   created() {
     axios.get(`http://localhost:4000/vidapi/getvid/รายการทีวี`).then((cate) => {
       this.tv = cate.data;
