@@ -57,6 +57,7 @@
           </a>
       </div>
     </div>
+    <iframe style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);" width="640" height="480" src="https://charts.mongodb.com/charts-node-rest-project-npeub/embed/charts?id=46dfbe85-daae-4064-9a2c-cd1c91c416c1&autoRefresh=60&theme=light"></iframe>
   </div>
 </template>
 <style scoped>

@@ -56,13 +56,20 @@
     </div>
 
     <div id="pop" style="display: none">
-      <a @click="close" style="position:absolute;top:0;z-index:0;width:100%;height:100vh;">
-        
+      <a
+        @click="close"
+        style="
+          position: absolute;
+          top: 0;
+          z-index: 0;
+          width: 100%;
+          height: 100vh;
+        "
+      >
       </a>
       <div
         class="position-absolute top-50 start-50 translate-middle"
         style="
-          
           width: 850px;
           border: 0px solid #181818;
           border-radius: 25px;
@@ -70,11 +77,14 @@
         "
       >
         <iframe
-        style="border: 0px solid ;border-top-left-radius: 25px;border-top-right-radius: 25px;"
+          style="
+            border: 0px solid;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+          "
           id="clipz"
           width="850"
           height="478"
-          src="https://www.youtube.com/embed/sEOuJ4z5aTc?playlist=sEOuJ4z5aTc&controls=0"
           title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -87,17 +97,14 @@
         ></div>
 
         <div style="padding: 25px 48px">
-          <div style="margin-top: -250px; position: absolute; z-index: 2">
+          <div style="margin-top: -160px; position: absolute; z-index: 2">
             <div>
-              <img
-                src="../../img/Brooklyn_Nine-Nine_Logo.png"
-                alt=""
-                style="width: 250px"
-              />
+              <p id="nme" style="color:white;font-weight:900;font-size:40px"></p>
             </div>
             <div class="mt-4">
-              <a
-                href="https://www.youtube.com/embed/sEOuJ4z5aTc?autoplay=1"
+              <a id="show"
+              ref="link"
+                @click="viewcnt($refs.link)"
                 class="btn btn-j"
                 style="
                   height: 42px;
@@ -109,9 +116,9 @@
                 <img src="../../img/play1.png" style="width: 35px" alt="" />
                 เล่น
               </a>
-              <a
-              target="_blank"
-                href="https://www.imdb.com/title/tt2467372/?ref_=nv_sr_srsg_0"
+              <a id="imbdd"
+                target="_blank"
+                
               >
                 <img src="../../img/imdb.png" style="height: 42px" alt="" />
               </a>
@@ -119,8 +126,8 @@
           </div>
           <div class="row">
             <div class="col-8">
-              <div style="font-size: 18px; color: white">
-                เจค เพอราลต้า นักสืบหัวไวยอดเกรียนแห่งสถานีตำรวจบรู๊คลินต้องเรียนรู้การทำตามกฎและเป็นผู้ร่วมทีมที่ดีเมื่อทีมของเขามีผู้กองคนใหม่ผู้เข้มงวดเข้ามาคุม
+              <div id="desc" style="font-size: 18px; color: white">
+                
               </div>
             </div>
             <div class="col-4">
@@ -129,8 +136,9 @@
                 data-user="ur131175552"
                 data-title="tt2467372"
                 data-style="p2"
-                >
-              ></span>
+              >
+                ></span
+              >
             </div>
           </div>
 
@@ -150,7 +158,10 @@
             />
           </div>
           <div class="lf mt-5">
-            <button
+            <a
+            ref="link"
+            vid_id="607c05847a2e6f246c5aaf8a"
+              @click="viewcnt($refs.link)"
               class="btn btn-j"
               style="
                 height: 56px;
@@ -161,9 +172,9 @@
             >
               <img src="../../img/play1.png" style="width: 45px" alt="" />
               เล่น
-            </button>
+            </a>
             <button
-              @click="infor"
+              @click="rrun('607c05847a2e6f246c5aaf8a')"
               class="btn btn-k"
               style="
                 pading-left: 35px;
@@ -183,17 +194,18 @@
           <div class="category col-12 mt-3 mb-3">รายการทีวี</div>
           <div class="col-12">
             <vueper-slides
+              style="padding-left: 2.3rem; padding-right: 5.3rem"
+
               class="no-shadow"
               :visible-slides="6"
+              slide-multiple
+              :gap="2"
+
               :slide-ratio="1 / 4"
-              :gap="3"
-              :dragging-distance="70"
+              :dragging-distance="200"
+              :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }"
             >
-              <vueper-slide
-                v-for="i in tv"
-                :key="i._id"
-                :image="'../../Thumbnail/' + i.thumbnail"
-              />
+              <vueper-slide @click="rrun(i._id)" v-for="i in tv" :key="i._id" :image="'../../thumbnail/' + i.thumbnail" />
             </vueper-slides>
           </div>
         </div>
@@ -202,17 +214,18 @@
           <div class="category mt-3 col-12 mb-3">คอมเมดี้</div>
           <div class="col-12">
             <vueper-slides
+              style="padding-left: 2.3rem; padding-right: 5.3rem"
+
               class="no-shadow"
               :visible-slides="6"
+              slide-multiple
+              :gap="2"
+
               :slide-ratio="1 / 4"
-              :gap="3"
-              :dragging-distance="70"
+              :dragging-distance="200"
+              :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }"
             >
-              <vueper-slide
-                v-for="i in com"
-                :key="i._id"
-                :image="'../../Thumbnail/' + i.thumbnail"
-              />
+              <vueper-slide @click="rrun(i._id)" v-for="i in com" :key="i._id" :image="'../../thumbnail/' + i.thumbnail" />
             </vueper-slides>
           </div>
         </div>
@@ -221,17 +234,19 @@
           <div class="category mt-3 col-12 mb-3">แอ็คชั่น</div>
           <div class="col-12">
             <vueper-slides
+              
+              style="padding-left: 2.3rem; padding-right: 5.3rem"
+
               class="no-shadow"
               :visible-slides="6"
+              slide-multiple
+              :gap="2"
+
               :slide-ratio="1 / 4"
-              :gap="3"
-              :dragging-distance="70"
+              :dragging-distance="200"
+              :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }"
             >
-              <vueper-slide
-                v-for="i in ac"
-                :key="i._id"
-                :image="'../../Thumbnail/' + i.thumbnail"
-              />
+              <vueper-slide @click="rrun(i._id)" v-for="i in ac" :key="i._id" :image="'../../thumbnail/' + i.thumbnail" />
             </vueper-slides>
           </div>
         </div>
@@ -240,17 +255,18 @@
           <div class="category mt-3 col-12 mb-3">ผจญภัย</div>
           <div class="col-12">
             <vueper-slides
+              style="padding-left: 2.3rem; padding-right: 5.3rem"
+
               class="no-shadow"
               :visible-slides="6"
+              slide-multiple
+              :gap="2"
+
               :slide-ratio="1 / 4"
-              :gap="3"
-              :dragging-distance="70"
+              :dragging-distance="200"
+              :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }"
             >
-              <vueper-slide
-                v-for="i in ad"
-                :key="i._id"
-                :image="'../../Thumbnail/' + i.thumbnail"
-              />
+              <vueper-slide @click="rrun(i._id)" v-for="i in ad" :key="i._id" :image="'../../thumbnail/' + i.thumbnail" />
             </vueper-slides>
           </div>
         </div>
@@ -259,20 +275,21 @@
           <div class="category mt-3 col-12 mb-3">สยองขวัญ</div>
           <div class="col-12">
             <vueper-slides
+              style="padding-left: 2.3rem; padding-right: 5.3rem"
+
               class="no-shadow"
               :visible-slides="6"
+              slide-multiple
+              :gap="2"
               :slide-ratio="1 / 4"
-              :gap="3"
-              :dragging-distance="70"
+              :dragging-distance="200"
+              :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }"
             >
-              <vueper-slide
-                v-for="i in hr"
-                :key="i._id"
-                :image="'../../Thumbnail/' + i.thumbnail"
-              />
+              <vueper-slide @click="rrun(i._id)" v-for="i in hr" :key="i._id" :image="'../../thumbnail/' + i.thumbnail" />
             </vueper-slides>
           </div>
         </div>
+        <div style="width: 100%; height: 100px"></div>
       </div>
     </div>
   </div>
@@ -332,7 +349,11 @@
 .gradiant-1 {
   width: 100%;
   height: 480px;
-  background: linear-gradient(0deg, rgba(24,24,24,1) 0%, rgba(255,255,255,0) 50%);
+  background: linear-gradient(
+    0deg,
+    rgba(24, 24, 24, 1) 0%,
+    rgba(255, 255, 255, 0) 50%
+  );
 }
 .bg {
   width: 100%;
@@ -346,20 +367,7 @@ import { VueperSlides, VueperSlide } from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
 export default {
   components: { VueperSlides, VueperSlide },
-  methods: {
-    infor() {
-      
-      jquery("#Vidy").trigger("pause");
-      jquery("#clipz")[0].src += "&autoplay=1&loop=1";
-      jquery("#pop").fadeIn();  
-      window.scrollTo(0,0);
-    },
-    close(){
-      jquery("#Vidy").trigger("play");
-      jquery("#clipz")[0].src = "https://www.youtube.com/embed/sEOuJ4z5aTc?playlist=sEOuJ4z5aTc&controls=0";
-      jquery("#pop").fadeOut(); 
-    }
-  },
+
   data() {
     return {
       tv: [],
@@ -367,6 +375,7 @@ export default {
       ac: [],
       ad: [],
       hr: [],
+      clipzz:""
     };
   },
 
@@ -386,6 +395,44 @@ export default {
     axios.get(`http://localhost:4000/vidapi/getvid/สยองขวัญ`).then((cate) => {
       this.hr = cate.data;
     });
+  },
+  methods: {
+    infor() {
+      jquery("#Vidy").trigger("pause");
+      jquery("#clipz")[0].src += "&autoplay=1&loop=1";
+      jquery("#pop").fadeIn();
+      window.scrollTo(0, 0);
+    },
+    close() {
+      jquery("#Vidy").trigger("play");
+      jquery("#clipz")[0].src =
+        "https://www.youtube.com/embed/sEOuJ4z5aTc?playlist=sEOuJ4z5aTc&controls=0";
+      jquery("#pop").fadeOut();
+    },
+    rrun(id){
+      axios.get(`http://localhost:4000/vidapi/${id}`).then((clip) => {
+      this.clipzz = clip.data;
+      this.clipzz.videolink= this.clipzz.videolink.substr(32,this.clipzz.videolink.lenght)
+      jquery('#show').attr('vid_id',this.clipzz._id)
+      jquery('#clipz').attr('src',`https://www.youtube.com/embed/${this.clipzz.videolink}?controls=0`)
+      jquery('#imdbb').attr('href',`${this.clipzz.score}`)
+      jquery('#nme').html(this.clipzz.vname)
+      jquery('#desc').html(this.clipzz.des)
+      jquery('#imbdd').attr('href',this.clipzz.score.split("\"")[9])
+      this.infor()
+    });
+    },
+    viewcnt(id){
+      let asd = id.getAttribute("vid_id")
+      console.log(typeof asd);
+      axios.get(`http://localhost:4000/vidapi/${asd}`).then((da) => {
+        let score = da.data.view += 1;
+        axios.put(`http://localhost:4000/vidapi/update/${asd}`,{view:score}).then((tt)=>{
+          let subb = tt.data.videolink.substr(32,tt.data.videolink.lenght)
+          window.location.href = `https://www.youtube.com/embed/${subb}?controls=0&autoplay=1`;
+        })
+      });
+    },
   },
 };
 </script>
