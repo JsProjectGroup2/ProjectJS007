@@ -12,6 +12,7 @@
           ><img style="width: 100%" src="../../img/admin.png" alt=""
         /></span>
       </a>
+      <hr />
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
           <a href="/admin" class="nav-link text-white">
@@ -159,20 +160,21 @@
                   </tr>
                 </thead>
                 <tbody align="center">
-                  <tr v-for="bases in base" :key="bases._id">
+                  <tr v-for="bases in searchbar" :key="bases._id">
                     <td>{{ bases.thumbnail }}</td>
                     <td>{{ bases.vname }}</td>
                     <td>
                       <div id="app" v-html="bases.score"></div>
                     </td>
                     <td>{{ bases.category }}</td>
-                    <td>
+                    <td width="130px">
                       <button
                         @click="editt(bases._id)"
                         class="btn btn-warning"
-                        style="margin-right: 1rem"
-                        >แก้ไข</button
+                        style="margin-right: 5px"
                       >
+                        แก้ไข
+                      </button>
                       <button
                         type="button"
                         @click.prevent="delvid(bases._id)"
@@ -254,8 +256,12 @@
         </div>
       </form>
 
-
-      <form id="edit" style="display:none" @submit.prevent="EditVideo" enctype="multipart/form-data">
+      <form
+        id="edit"
+        style="display: none"
+        @submit.prevent="EditVideo"
+        enctype="multipart/form-data"
+      >
         <div class="row">
           <div class="col-12 mt-3">
             <p style="font-size: 22px; padding-left: 1rem">แก้ไขวีดีโอ</p>
@@ -327,12 +333,14 @@
 </style>
 <script>
 import axios from "axios";
-import jquery from 'jquery'
+import jquery from "jquery";
 export default {
+  
   data() {
     return {
       cate: "",
-      base: "",
+      base: [],
+      search: '',
       video: {
         thumbnail: "",
         vname: "",
@@ -343,27 +351,39 @@ export default {
         year: "",
       },
       upload: "",
-     
     };
   },
   created() {
-    
     axios.get("http://localhost:4000/vidapi/").then((res) => {
       this.base = res.data;
     });
-    
+  },
+  computed:{
+    searchbar(){
+      return this.base.filter((value)=>{
+        if(this.search != ''){
+          return value.vname.toLowerCase().includes(this.search.toLowerCase())
+        }
+        else if(this.cate != ''){
+          return value.category.toLowerCase().includes(this.cate.toLowerCase())
+        }
+        else{
+          return value;
+        }
+        
+      })
+    }
   },
   methods: {
-
-    editt(id){
-      jquery('#add').fadeOut();
-      jquery('#edit').fadeIn();
-      this.call(id)
+    editt(id) {
+      jquery("#add").fadeOut();
+      jquery("#edit").fadeIn();
+      this.call(id);
     },
-    call(id){
-      axios.get(`http://localhost:4000/vidapi/${id}`).then(res=>{
-          this.video = res.data
-      })
+    call(id) {
+      axios.get(`http://localhost:4000/vidapi/${id}`).then((res) => {
+        this.video = res.data;
+      });
     },
     AddVideo() {
       this.video.thumbnail = this.$refs.file.files[0].name;
@@ -383,22 +403,24 @@ export default {
               category: "",
               videolink: "",
               year: "",
-
             };
           });
       });
     },
     EditVideo() {
-      if(this.$refs.file.files[0] != undefined){
+      if (this.$refs.file.files[0] != undefined) {
         this.video.thumbnail = this.$refs.file.files[0].name;
         this.upload = this.$refs.file.files[0];
       }
-      
+
       const formData = new FormData();
       formData.append("file", this.upload);
       axios.post("http://localhost:4000/upload", formData).then(() => {
         axios
-          .put(`http://localhost:4000/vidapi/update/${this.video._id}`, this.video)
+          .put(
+            `http://localhost:4000/vidapi/update/${this.video._id}`,
+            this.video
+          )
           .then(() => {
             this.$swal.fire("แก้ไขวีดีโอสำเร็จ", "เย้ !", "successs");
             this.video = {
@@ -410,17 +432,15 @@ export default {
               videolink: "",
               year: "",
             };
-           location.reload();
-            
+            location.reload();
           });
       });
-      
     },
-    delvid(id){
-        axios.delete(`http://localhost:4000/vidapi/del/${id}`).then(()=>{
-          location.reload();
-        })
-    }
+    delvid(id) {
+      axios.delete(`http://localhost:4000/vidapi/del/${id}`).then(() => {
+        location.reload();
+      });
+    },
   },
 };
 </script>

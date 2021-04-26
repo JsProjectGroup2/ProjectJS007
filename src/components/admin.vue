@@ -1,6 +1,6 @@
 <template>
   <div >
-    <div class="d-flex flex-column p-3 text-white bg-dark" style="width: 280px;height:100vh">
+    <div class="position-fixed p-3 text-white bg-dark" style="width: 280px;height:100vh">
       <a
         href="/admin"
         class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
@@ -57,7 +57,19 @@
           </a>
       </div>
     </div>
-    <iframe style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);" width="640" height="480" src="https://charts.mongodb.com/charts-node-rest-project-npeub/embed/charts?id=46dfbe85-daae-4064-9a2c-cd1c91c416c1&autoRefresh=60&theme=light"></iframe>
+    <div class="container-fluid" style="padding-left:300px;">
+        <div class="row">
+          <div class="col-6 mt-4">
+            <iframe style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);" width="100%" height="480" src="https://charts.mongodb.com/charts-node-rest-project-npeub/embed/charts?id=46dfbe85-daae-4064-9a2c-cd1c91c416c1&autoRefresh=60&theme=light"></iframe>
+          </div>
+          <div class="col-6 mt-4">
+            <iframe style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);" width="100%" height="480" src="https://charts.mongodb.com/charts-node-rest-project-npeub/embed/charts?id=f32636bf-2e26-4781-af58-0f18c59b0856&autoRefresh=60&theme=light"></iframe>
+          </div>
+          <div class="col-12 mt-3 mb-3">
+            <iframe style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);" width="100%" height="700" src="https://charts.mongodb.com/charts-node-rest-project-npeub/embed/charts?id=463d84d0-80e8-4fe3-a76b-f14a009f30bd&autoRefresh=60&theme=light"></iframe>
+          </div>
+        </div>
+    </div>
   </div>
 </template>
 <style scoped>

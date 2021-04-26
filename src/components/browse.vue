@@ -103,8 +103,8 @@
             </div>
             <div class="mt-4">
               <a id="show"
-              ref="link"
-                @click="viewcnt($refs.link)"
+              ref="link1"
+                @click="viewcnt($refs.link1)"
                 class="btn btn-j"
                 style="
                   height: 42px;
@@ -159,9 +159,9 @@
           </div>
           <div class="lf mt-5">
             <a
-            ref="link"
+            ref="link2"
             vid_id="607c05847a2e6f246c5aaf8a"
-              @click="viewcnt($refs.link)"
+              @click="viewcnt($refs.link2)"
               class="btn btn-j"
               style="
                 height: 56px;
@@ -420,11 +420,12 @@ export default {
       jquery('#desc').html(this.clipzz.des)
       jquery('#imbdd').attr('href',this.clipzz.score.split("\"")[9])
       this.infor()
+
     });
     },
     viewcnt(id){
+
       let asd = id.getAttribute("vid_id")
-      console.log(typeof asd);
       axios.get(`http://localhost:4000/vidapi/${asd}`).then((da) => {
         let score = da.data.view += 1;
         axios.put(`http://localhost:4000/vidapi/update/${asd}`,{view:score}).then((tt)=>{
@@ -433,6 +434,7 @@ export default {
         })
       });
     },
+    
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="d-flex flex-column p-3 text-white bg-dark"
+      class="position-fixed p-3 text-white bg-dark"
       style="width: 280px; height: 100vh"
     >
       <a
@@ -122,10 +122,92 @@
         </a>
       </div>
     </div>
+    <div class="container-fluid" style="padding-left:300px">
+      <div class="row">
+        <div class="col-12 mt-4 mb-3">
+           <p style="font-size: 22px; padding-left: 1rem">วิดีโอทั้งหมด</p>
+           <hr>
+        </div>
+        <div class="col-6 mb-3">
+          ค้นหาข้อมูลด้วยชื่อหนัง
+              <input
+                type="text"
+                class="form-control"
+                placeholder="ค้นหา"
+                v-model="search"
+              />
+        </div>
+        <div class="col-6 mb-3">
+          เลือกประเภทของหนัง
+            <select class="form-select" v-model="cate">
+              <option>รายการทีวี</option>
+              <option>คอมเมดี้</option>
+              <option>แอ็คชั่น</option>
+              <option>ผจญภัย</option>
+              <option>สยองขวัญ</option>
+            </select>
+        </div>
+        <div class="col-12 mb-3">
+           <table class="table table-hover table-dark">
+                <thead>
+                  <tr align="center">
+                    <th>ปกวิดีโอ</th>
+                    <th>ชื่อวิดีโอ</th>
+                    <th>ประเภท</th>
+                    <th>จำนวนคนดู</th>
+                  </tr>
+                </thead>
+                <tbody align="center" class="p-3">
+                  <tr v-for="bases in Search" :key="bases._id">
+                    <td>
+                      <img :src="`../../Thumbnail/${bases.thumbnail}`" width="100">
+                    </td>
+                    <td>{{ bases.vname }}</td>
+                    <td>{{ bases.category }}</td>
+                    <th>{{bases.view}} คน</th>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <style scoped>
 </style>
-<script>
-export default {};
+<script>  
+import axios from 'axios'
+
+export default {
+  data(){
+    return {
+      cate:'',
+      search:'',
+      video:[]
+    }
+  },
+  created(){
+    // Load Data
+    const apiURL = "http://localhost:4000/vidapi/total";
+
+    axios.get(apiURL).then((res)=>{
+        this.video = res.data
+    })
+  },
+  computed:{
+    Search(){
+      return this.video.filter((value)=>{
+        if(this.search != ''){
+          return value.vname.toLowerCase().includes(this.search.toLowerCase())
+        }
+        else if(this.cate != ''){
+          return value.category.toLowerCase().includes(this.cate.toLowerCase())
+        }
+        else{
+          return value;
+        }
+      })
+    }
+  }
+};
 </script>

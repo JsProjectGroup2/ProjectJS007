@@ -18,14 +18,6 @@ let memberSchema = new Schema({
     isAdmin:{
         type:Boolean,
         default:false
-    },
-    profile:{
-        nickname:{
-            type:String
-        },
-        pic:{
-            type:String
-        }
     }
 },{
     collection: 'Member'

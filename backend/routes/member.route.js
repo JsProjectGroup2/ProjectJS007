@@ -13,6 +13,17 @@ memberRoute.route("/create-member").post((req, res, next) => {
   });
 });
 
+memberRoute.route('/find/:id').post((req,res,next)=>{
+  MemberModel.findById(req.params.id,(error,data)=>{
+    if(error) {
+      return next(error)
+    } else {
+      res.json(data)
+    }
+  })
+})
+
+
 memberRoute.route("/:mail").post((req, res, next)=>{
   MemberModel.findOne({
     mail: req.params.mail,
@@ -66,7 +77,27 @@ memberRoute.route("/pacage/:id").put((req, res, next)=>{
     })
 });
 
+memberRoute.route("/getmember").get((req, res, next)=>{
+  MemberModel.find(
+    (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.json(data);
+      }
+    })
+});
 
+memberRoute.route('/del/:id').delete((req,res,next)=>{
+  MemberModel.findByIdAndDelete(req.params.id,(error,data)=>{
+    if(error){
+      return next(error)
+    }
+    else {
+      res.json(data)
+    }
+  })
+})
 
 
 module.exports = memberRoute;

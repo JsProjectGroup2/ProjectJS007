@@ -23,6 +23,18 @@ videoRoute.route("/").get((req, res, next) => {
   }).sort({_id:-1});
 });
 
+videoRoute.route('/total').get((req,res,next)=>{
+  VideoModel.find((error,data)=>{
+    if(error){
+      return next(error)
+    }
+    else{
+      res.json(data)
+    }
+  }).sort({view:-1})
+})
+
+
 videoRoute.route("/getvid/:category").get((req, res, next) => {
   VideoModel.find({category:req.params.category},(error, data) => {
     if (error) {
