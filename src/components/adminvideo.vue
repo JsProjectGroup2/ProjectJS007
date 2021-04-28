@@ -198,7 +198,7 @@
           </div>
           <div class="col-6 mb-3">
             <label for="file" class="form-label">รูปปกวีดีโอ</label>
-            <input type="file" id="file" ref="file" class="form-control" />
+            <input type="file" id="file" ref="filez" class="form-control" />
           </div>
           <div class="col-6 mb-3">
             <label for="video_name" class="form-label">ชื่อวิดีโอ</label>
@@ -335,12 +335,11 @@
 import axios from "axios";
 import jquery from "jquery";
 export default {
-  
   data() {
     return {
       cate: "",
       base: [],
-      search: '',
+      search: "",
       video: {
         thumbnail: "",
         vname: "",
@@ -358,21 +357,18 @@ export default {
       this.base = res.data;
     });
   },
-  computed:{
-    searchbar(){
-      return this.base.filter((value)=>{
-        if(this.search != ''){
-          return value.vname.toLowerCase().includes(this.search.toLowerCase())
-        }
-        else if(this.cate != ''){
-          return value.category.toLowerCase().includes(this.cate.toLowerCase())
-        }
-        else{
+  computed: {
+    searchbar() {
+      return this.base.filter((value) => {
+        if (this.search != "") {
+          return value.vname.toLowerCase().includes(this.search.toLowerCase());
+        } else if (this.cate != "") {
+          return value.category.toLowerCase().includes(this.cate.toLowerCase());
+        } else {
           return value;
         }
-        
-      })
-    }
+      });
+    },
   },
   methods: {
     editt(id) {
@@ -386,26 +382,29 @@ export default {
       });
     },
     AddVideo() {
-      this.video.thumbnail = this.$refs.file.files[0].name;
-      this.upload = this.$refs.file.files[0];
-      const formData = new FormData();
-      formData.append("file", this.upload);
-      axios.post("http://localhost:4000/upload", formData).then(() => {
-        axios
-          .post("http://localhost:4000/vidapi/create-video", this.video)
-          .then(() => {
-            this.$swal.fire("เพิ่มวีดีโอสำเร็จ", "เย้ !", "successs");
-            this.video = {
-              thumbnail: "",
-              name: "",
-              score: "",
-              des: "",
-              category: "",
-              videolink: "",
-              year: "",
-            };
-          });
-      });
+      
+        this.video.thumbnail = this.$refs.filez.files[0].name;
+        this.upload = this.$refs.filez.files[0];
+        const formData = new FormData();
+        formData.append("file", this.upload);
+        axios.post("http://localhost:4000/upload", formData).then(() => {
+          axios
+            .post("http://localhost:4000/vidapi/create-video", this.video)
+            .then(() => {
+              this.$swal.fire("เพิ่มวีดีโอสำเร็จ", "เย้ !", "successs");
+              this.video = {
+                thumbnail: "",
+                vname: "",
+                score: "",
+                des: "",
+                category: "",
+                videolink: "",
+                year: "",
+              };
+              location.reload();
+            });
+        });
+
     },
     EditVideo() {
       if (this.$refs.file.files[0] != undefined) {
