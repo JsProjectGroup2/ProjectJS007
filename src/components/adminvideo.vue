@@ -353,7 +353,8 @@ export default {
     };
   },
   created() {
-    axios.get("http://localhost:4000/vidapi/").then((res) => {
+    
+    axios.get("http://project007.app.ruk-com.cloud/vidapi/").then((res) => {
       this.base = res.data;
     });
   },
@@ -377,7 +378,7 @@ export default {
       this.call(id);
     },
     call(id) {
-      axios.get(`http://localhost:4000/vidapi/${id}`).then((res) => {
+      axios.get(`http://project007.app.ruk-com.cloud/vidapi/${id}`).then((res) => {
         this.video = res.data;
       });
     },
@@ -387,9 +388,9 @@ export default {
         this.upload = this.$refs.filez.files[0];
         const formData = new FormData();
         formData.append("file", this.upload);
-        axios.post("http://localhost:4000/upload", formData).then(() => {
+        axios.post("http://project007.app.ruk-com.cloud/upload", formData).then(() => {
           axios
-            .post("http://localhost:4000/vidapi/create-video", this.video)
+            .post("http://project007.app.ruk-com.cloud/vidapi/create-video", this.video)
             .then(() => {
               this.$swal.fire("เพิ่มวีดีโอสำเร็จ", "เย้ !", "successs");
               this.video = {
@@ -407,17 +408,17 @@ export default {
 
     },
     EditVideo() {
+      
       if (this.$refs.file.files[0] != undefined) {
         this.video.thumbnail = this.$refs.file.files[0].name;
         this.upload = this.$refs.file.files[0];
       }
-
       const formData = new FormData();
       formData.append("file", this.upload);
-      axios.post("http://localhost:4000/upload", formData).then(() => {
+      axios.post("http://project007.app.ruk-com.cloud/upload", formData).then(() => {
         axios
           .put(
-            `http://localhost:4000/vidapi/update/${this.video._id}`,
+            `http://project007.app.ruk-com.cloud/vidapi/update/${this.video._id}`,
             this.video
           )
           .then(() => {
@@ -431,12 +432,14 @@ export default {
               videolink: "",
               year: "",
             };
+          
             location.reload();
-          });
+          })
+          
       });
     },
     delvid(id) {
-      axios.delete(`http://localhost:4000/vidapi/del/${id}`).then(() => {
+      axios.delete(`http://project007.app.ruk-com.cloud/vidapi/del/${id}`).then(() => {
         location.reload();
       });
     },

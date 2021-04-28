@@ -4,6 +4,7 @@ let mongoose = require('mongoose');
 let database = require('./database');
 let bodyParser = require('body-parser');
 const multer = require('multer');
+const path = require('path')
 
 
 mongoose.Promise = global.Promise;
@@ -22,7 +23,7 @@ const videoAPI = require('./routes/video.route');
 const upload = multer({
     storage:multer.diskStorage({
         destination:(req,file,cb)=>{
-            cb(null,'../public/Thumbnail/');
+            cb(null,'Thumbnail/');
         },
         filename:(req,file,cb)=>{
             let newfile = file.originalname;
@@ -48,6 +49,7 @@ app.use(cors())
 app.use('/api',memberAPI)
 app.use('/vidapi',videoAPI)
 
+app.use('/thumbnail',express.static(path.join(__dirname,'Thumbnail/')))
 app.post('/upload',upload.single('file'),(req,res)=>{
     res.json({file:req.file})
 })

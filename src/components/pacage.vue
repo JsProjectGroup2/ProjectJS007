@@ -187,7 +187,7 @@ export default {
       this.$router.push('/browse')
     }
     let chmail = localStorage.getItem("mail");
-    axios.post(`http://localhost:4000/api//signup/${chmail}`).then((bn) => {
+    axios.post(`http://project007.app.ruk-com.cloud/api//signup/${chmail}`).then((bn) => {
       this.id = bn.data;
     });
   },
@@ -195,7 +195,7 @@ export default {
     updt() {
       this.id.package = 1
       console.log(this.id);
-      let api = `http://localhost:4000/api/pacage/${this.id._id}`;
+      let api = `http://project007.app.ruk-com.cloud/api/pacage/${this.id._id}`;
       axios.put(api, this.id).then((flert) => {
         if (flert.data != null) {
           this.$swal.fire("ชำระเงินเสร็จสิ้น !", "ขอให้สนุกกับบริการของเรา", "success").then(() => {

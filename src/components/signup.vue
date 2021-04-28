@@ -201,12 +201,12 @@ export default {
     
     proces() {
       clearInterval(this.Interval);
-      let apicheck = `http://localhost:4000/api/signup/${this.member.mail}`;
+      let apicheck = `http://project007.app.ruk-com.cloud/api/signup/${this.member.mail}`;
       axios.post(apicheck).then((res) => {
         if (res.data != null) {
           jquery("#err").fadeIn();
         } else {
-          let apiregis = "http://localhost:4000/api/create-member/";
+          let apiregis = "http://project007.app.ruk-com.cloud/api/create-member/";
           axios.post(apiregis, this.member).then((abc) => {
             localStorage.removeItem('regismail')
             localStorage.setItem('mail',this.member.mail)
