@@ -218,7 +218,7 @@ export default {
         jquery("#2").css("border-bottom", "none");
       }
       if ($1 != "" && $2 != "") {
-        let apilogin = `http://localhost:4000/api/login/${this.member.mail}/${this.member.password}`;
+        let apilogin = `http://project007.app.ruk-com.cloud/api/login/${this.member.mail}/${this.member.password}`;
         axios.post(apilogin).then((res) => {
           if (res.data == null) {
             this.isCorrect = true;

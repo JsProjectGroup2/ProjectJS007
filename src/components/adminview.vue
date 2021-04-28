@@ -160,7 +160,7 @@
                 <tbody align="center" class="p-3">
                   <tr v-for="bases in Search" :key="bases._id">
                     <td>
-                      <img :src="`../../Thumbnail/${bases.thumbnail}`" width="100">
+                      <img :src="`http://project007.app.ruk-com.cloud/Thumbnail/${bases.thumbnail}`" width="100">
                     </td>
                     <td>{{ bases.vname }}</td>
                     <td>{{ bases.category }}</td>
@@ -188,7 +188,7 @@ export default {
   },
   created(){
     // Load Data
-    const apiURL = "http://localhost:4000/vidapi/total";
+    const apiURL = "http://project007.app.ruk-com.cloud/vidapi/total";
 
     axios.get(apiURL).then((res)=>{
         this.video = res.data

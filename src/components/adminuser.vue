@@ -294,7 +294,7 @@ export default {
     };
   },
   created() {
-    axios.get("http://localhost:4000/api/getmember").then((res) => {
+    axios.get("http://project007.app.ruk-com.cloud/api/getmember").then((res) => {
       this.base = res.data;
     });
   },
@@ -321,12 +321,12 @@ export default {
       this.call(id);
     },
     call(id) {
-      axios.post(`http://localhost:4000/api/find/${id}`).then((res) => {
+      axios.post(`http://project007.app.ruk-com.cloud/api/find/${id}`).then((res) => {
         this.member = res.data;
       });
     },
     AddUser(){
-        const apiURL = "http://localhost:4000/api/create-member";
+        const apiURL = "http://project007.app.ruk-com.cloud/api/create-member";
         axios.post(apiURL,this.member).then(()=>{
           this.$swal("ดำเนินการสำเร็จ","ทำการเพิ่มข้อมูลผู้ใช้รายใหม่สำเร็จ","success").then(()=>{
             location.reload();
@@ -334,14 +334,14 @@ export default {
         })
     },
     delvid(id) {
-      axios.delete(`http://localhost:4000/api/del/${id}`).then(() => {
+      axios.delete(`http://project007.app.ruk-com.cloud/api/del/${id}`).then(() => {
         this.$swal("ดำเนินการสำเร็จ","ทำการลบสำเร็จ","success").then(()=>{
           location.reload();
         })
       });
     },
     EditUser(){
-      const apiURL = `http://localhost:4000/api/pacage/${this.member._id}`;
+      const apiURL = `http://project007.app.ruk-com.cloud/api/pacage/${this.member._id}`;
       axios.put(apiURL,this.member).then((res)=>{
         this.$swal.fire("ดำเนินการสำเร็จ","ทำการแก้ไขข้อมูลบัญชี " + res.data.mail + "สำเร็จ","success").then(()=>{
           location.reload();

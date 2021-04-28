@@ -205,7 +205,7 @@
               :dragging-distance="200"
               :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }"
             >
-              <vueper-slide @click="rrun(i._id)" v-for="i in tv" :key="i._id" :image="'../../thumbnail/' + i.thumbnail" />
+              <vueper-slide @click="rrun(i._id)" v-for="i in tv" :key="i._id" :image="'http://project007.app.ruk-com.cloud/thumbnail/' + i.thumbnail" />
             </vueper-slides>
           </div>
         </div>
@@ -225,7 +225,7 @@
               :dragging-distance="200"
               :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }"
             >
-              <vueper-slide @click="rrun(i._id)" v-for="i in com" :key="i._id" :image="'../../thumbnail/' + i.thumbnail" />
+              <vueper-slide @click="rrun(i._id)" v-for="i in com" :key="i._id" :image="'http://project007.app.ruk-com.cloud/thumbnail/' + i.thumbnail" />
             </vueper-slides>
           </div>
         </div>
@@ -246,7 +246,7 @@
               :dragging-distance="200"
               :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }"
             >
-              <vueper-slide @click="rrun(i._id)" v-for="i in ac" :key="i._id" :image="'../../thumbnail/' + i.thumbnail" />
+              <vueper-slide @click="rrun(i._id)" v-for="i in ac" :key="i._id" :image="'http://project007.app.ruk-com.cloud/thumbnail/' + i.thumbnail" />
             </vueper-slides>
           </div>
         </div>
@@ -266,7 +266,7 @@
               :dragging-distance="200"
               :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }"
             >
-              <vueper-slide @click="rrun(i._id)" v-for="i in ad" :key="i._id" :image="'../../thumbnail/' + i.thumbnail" />
+              <vueper-slide @click="rrun(i._id)" v-for="i in ad" :key="i._id" :image="'http://project007.app.ruk-com.cloud/thumbnail/' + i.thumbnail" />
             </vueper-slides>
           </div>
         </div>
@@ -285,7 +285,7 @@
               :dragging-distance="200"
               :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }"
             >
-              <vueper-slide @click="rrun(i._id)" v-for="i in hr" :key="i._id" :image="'../../thumbnail/' + i.thumbnail" />
+              <vueper-slide @click="rrun(i._id)" v-for="i in hr" :key="i._id" :image="'http://project007.app.ruk-com.cloud/thumbnail/' + i.thumbnail" />
             </vueper-slides>
           </div>
         </div>
@@ -380,19 +380,19 @@ export default {
   },
 
   created() {
-    axios.get(`http://localhost:4000/vidapi/getvid/รายการทีวี`).then((cate) => {
+    axios.get(`http://project007.app.ruk-com.cloud/vidapi/getvid/รายการทีวี`).then((cate) => {
       this.tv = cate.data;
     });
-    axios.get(`http://localhost:4000/vidapi/getvid/คอมเมดี้`).then((cate) => {
+    axios.get(`http://project007.app.ruk-com.cloud/vidapi/getvid/คอมเมดี้`).then((cate) => {
       this.com = cate.data;
     });
-    axios.get(`http://localhost:4000/vidapi/getvid/แอ็คชั่น`).then((cate) => {
+    axios.get(`http://project007.app.ruk-com.cloud/vidapi/getvid/แอ็คชั่น`).then((cate) => {
       this.ac = cate.data;
     });
-    axios.get(`http://localhost:4000/vidapi/getvid/ผจญภัย`).then((cate) => {
+    axios.get(`http://project007.app.ruk-com.cloud/vidapi/getvid/ผจญภัย`).then((cate) => {
       this.ad = cate.data;
     });
-    axios.get(`http://localhost:4000/vidapi/getvid/สยองขวัญ`).then((cate) => {
+    axios.get(`http://project007.app.ruk-com.cloud/vidapi/getvid/สยองขวัญ`).then((cate) => {
       this.hr = cate.data;
     });
   },
@@ -410,7 +410,7 @@ export default {
       jquery("#pop").fadeOut();
     },
     rrun(id){
-      axios.get(`http://localhost:4000/vidapi/${id}`).then((clip) => {
+      axios.get(`http://project007.app.ruk-com.cloud/vidapi/${id}`).then((clip) => {
       this.clipzz = clip.data;
       this.clipzz.videolink= this.clipzz.videolink.substr(32,this.clipzz.videolink.lenght)
       jquery('#show').attr('vid_id',this.clipzz._id)
@@ -426,9 +426,9 @@ export default {
     viewcnt(id){
 
       let asd = id.getAttribute("vid_id")
-      axios.get(`http://localhost:4000/vidapi/${asd}`).then((da) => {
+      axios.get(`http://project007.app.ruk-com.cloud/vidapi/${asd}`).then((da) => {
         let score = da.data.view += 1;
-        axios.put(`http://localhost:4000/vidapi/update/${asd}`,{view:score}).then((tt)=>{
+        axios.put(`http://project007.app.ruk-com.cloud/vidapi/update/${asd}`,{view:score}).then((tt)=>{
           let subb = tt.data.videolink.substr(32,tt.data.videolink.lenght)
           window.location.href = `https://www.youtube.com/embed/${subb}?controls=0&autoplay=1`;
         })
