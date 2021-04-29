@@ -1,8 +1,8 @@
 <template>
   <div>
     <div
-      class="position-fixed p-3 text-white bg-dark"
-      style="width: 280px; height: 100vh; top: 0"
+      class="position-fixed text-white bg-dark"
+      style="padding-top:85px;width: 280px; height: 100vh; top: 0"
     >
       <router-link
         to="/admin/user"
@@ -122,13 +122,13 @@
         </a>
       </div>
     </div>
-    <div class="container mt-3" style="padding-left: 280px">
+    <div class="container-fluid" style="padding-left: 300px">
       <div class="row">
-        <div class="col-12">
+        <div class="col-12  mt-4 mb-3">
           <p style="font-size: 22px; padding-left: 1rem">บัญชีผู้ใช้ทั้งหมดทั้งหมด</p>
           <hr />
           <div class="row">
-            <div class="col-6" style="padding-left: 30px">
+            <div class="col-6 mb-3">
               ค้นหาข้อมูลด้วยอีเมลผู้ใช้
               <input
                 type="text"

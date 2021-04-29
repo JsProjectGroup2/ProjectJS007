@@ -124,7 +124,7 @@
     </div>
     <div class="container-fluid" style="padding-left:300px">
       <div class="row">
-        <div class="col-12 mt-4 mb-3">
+        <div class="col-12 mt-4">
            <p style="font-size: 22px; padding-left: 1rem">วิดีโอทั้งหมด</p>
            <hr>
         </div>
@@ -147,7 +147,7 @@
               <option>สยองขวัญ</option>
             </select>
         </div>
-        <div class="col-12 mb-3">
+        <div class="col-12 mt-3">
            <table class="table table-hover table-dark">
                 <thead>
                   <tr align="center">

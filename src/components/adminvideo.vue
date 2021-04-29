@@ -122,13 +122,13 @@
         </router-link>
       </div>
     </div>
-    <div class="container mt-3" style="padding-left: 280px">
+    <div class="container-fluid" style="padding-left: 300px">
       <div class="row">
-        <div class="col-12">
+        <div class="col-12  mt-4 mb-3">
           <p style="font-size: 22px; padding-left: 1rem">วิดีโอทั้งหมด</p>
           <hr />
           <div class="row">
-            <div class="col-6" style="padding-left: 30px">
+            <div class="col-6 mb-3">
               ค้นหาข้อมูลด้วยชื่อหนัง
               <input
                 type="text"
@@ -137,7 +137,7 @@
                 v-model="search"
               />
             </div>
-            <div class="col-6" style="padding-left: 30px">
+            <div class="col-6 mb-3">
               เลือกประเภทของหนัง
               <select class="form-select" v-model="cate">
                 <option>รายการทีวี</option>
