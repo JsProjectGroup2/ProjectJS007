@@ -1,5 +1,5 @@
 <template>
-  <nav style="z-index: 4 ;" class="position-absolute top-0 start-0 w-100">
+  <nav style="z-index: 4 ;padding-top:85px" class="position-absolute top-0 start-0 w-100">
     <div class="container-fluid">
       <div class="row">
         <div class="col-6">
