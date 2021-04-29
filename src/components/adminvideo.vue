@@ -4,14 +4,14 @@
       class="position-fixed p-3 text-white bg-dark"
       style="width: 280px; height: 100vh; top: 0"
     >
-      <a
-        href="/admin/"
+      <router-link
+        to="/admin/video"
         class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
       >
         <span class="fs-4"
           ><img style="width: 100%" src="../../img/admin.png" alt=""
         /></span>
-      </a>
+      </router-link>
       <hr />
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
@@ -37,7 +37,7 @@
           </a>
         </li>
         <li>
-          <a href="/admin/user" class="nav-link text-white">
+          <router-link to="/admin/user" class="nav-link text-white">
             <svg
               style="padding-right: 5px"
               xmlns="http://www.w3.org/2000/svg"
@@ -52,10 +52,10 @@
               />
             </svg>
             ผู้ใช้
-          </a>
+          </router-link>
         </li>
         <li>
-          <a href="/admin/view" class="nav-link text-white">
+          <router-link to="/admin/view" class="nav-link text-white">
             <svg
               style="padding-right: 5px"
               xmlns="http://www.w3.org/2000/svg"
@@ -70,10 +70,10 @@
               />
             </svg>
             ยอดคนดู
-          </a>
+          </router-link>
         </li>
         <li>
-          <a href="/admin/video" class="nav-link active">
+          <router-link to="/admin/video" class="nav-link active">
             <svg
               style="padding-right: 5px"
               xmlns="http://www.w3.org/2000/svg"
@@ -94,12 +94,12 @@
               />
             </svg>
             วิดีโอ
-          </a>
+          </router-link>
         </li>
       </ul>
       <hr />
       <div>
-        <a href="/logout" class="nav-link text-white">
+        <router-link to="/logout" class="nav-link text-white">
           <svg
             style="padding-right: 5px"
             xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +119,7 @@
             />
           </svg>
           ออกจากระบบ
-        </a>
+        </router-link>
       </div>
     </div>
     <div class="container mt-3" style="padding-left: 280px">

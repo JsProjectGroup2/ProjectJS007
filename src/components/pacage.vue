@@ -1,7 +1,7 @@
 <template>
   <nav
     class="position-absolute top-0 start-0 w-100"
-    style="border-bottom: 1px solid #e6e6e6"
+    style="border-bottom: 1px solid #e6e6e6;"
   >
     <div class="container-fluid">
       <div class="row">

@@ -4,18 +4,18 @@
       class="position-fixed p-3 text-white bg-dark"
       style="width: 280px; height: 100vh; top: 0"
     >
-      <a
-        href="/admin/user"
+      <router-link
+        to="/admin/user"
         class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
       >
         <span class="fs-4"
           ><img style="width: 100%" src="../../img/admin.png" alt=""
         /></span>
-      </a>
+      </router-link>
       <hr />
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a href="/admin" class="nav-link text-white">
+          <router-link to="/admin" class="nav-link text-white">
             <svg
               style="padding-right: 5px"
               xmlns="http://www.w3.org/2000/svg"
@@ -34,10 +34,10 @@
               />
             </svg>
             แดชบอร์ด
-          </a>
+          </router-link>
         </li>
         <li>
-          <a href="/admin/user" class="nav-link active">
+          <router-link to="/admin/user" class="nav-link active">
             <svg
               style="padding-right: 5px"
               xmlns="http://www.w3.org/2000/svg"
@@ -52,10 +52,10 @@
               />
             </svg>
             ผู้ใช้
-          </a>
+          </router-link>
         </li>
         <li>
-          <a href="/admin/view" class="nav-link text-white">
+          <router-link to="/admin/view" class="nav-link text-white">
             <svg
               style="padding-right: 5px"
               xmlns="http://www.w3.org/2000/svg"
@@ -70,10 +70,10 @@
               />
             </svg>
             ยอดคนดู
-          </a>
+          </router-link>
         </li>
         <li>
-          <a href="/admin/video" class="nav-link text-white">
+          <router-link to="/admin/video" class="nav-link text-white">
             <svg
               style="padding-right: 5px"
               xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@
               />
             </svg>
             วิดีโอ
-          </a>
+          </router-link>
         </li>
       </ul>
       <hr />
@@ -326,6 +326,9 @@ export default {
       });
     },
     AddUser(){
+      if(this.member.isAdmin){
+        this.member.package = 1;
+      }
         const apiURL = "http://project007.app.ruk-com.cloud/api/create-member";
         axios.post(apiURL,this.member).then(()=>{
           this.$swal("ดำเนินการสำเร็จ","ทำการเพิ่มข้อมูลผู้ใช้รายใหม่สำเร็จ","success").then(()=>{

@@ -1,5 +1,5 @@
 <template>
-  <nav style="z-index: 4" class="position-absolute top-0 start-0 w-100">
+  <nav style="z-index: 4 ;" class="position-absolute top-0 start-0 w-100">
     <div class="container-fluid">
       <div class="row">
         <div class="col-6">
@@ -160,7 +160,7 @@
           <div class="lf mt-5">
             <a
             ref="link2"
-            vid_id="607c05847a2e6f246c5aaf8a"
+            vid_id="608a129f73027f0e218ca41d"
               @click="viewcnt($refs.link2)"
               class="btn btn-j"
               style="
@@ -174,7 +174,7 @@
               เล่น
             </a>
             <button
-              @click="rrun('607c05847a2e6f246c5aaf8a')"
+              @click="rrun('608a129f73027f0e218ca41d')"
               class="btn btn-k"
               style="
                 pading-left: 35px;
